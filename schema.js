@@ -19,21 +19,29 @@ const Person = new GraphQLObjectType({
         return {
             id: {
                 type: GraphQLInt,
-                resolve(person) {
-                    return person.id
-                }
             },
             firstName: {
                 type: GraphQLString,
-                resolve(person) {
-                    return person.firstName
-                }
             },
             lastName: {
                 type: GraphQLString,
-                resolve(person) {
-                    return person.lastName
-                }
+            }
+        }
+    }
+})
+
+const Album = new GraphQLObjectType({
+    name: 'Album',
+    fields () {
+        return {
+            id: {
+                type: GraphQLInt,             
+            },
+            artist: {
+                type: GraphQLString
+            },
+            song: {
+                type: GraphQLString
             }
         }
     }
@@ -50,6 +58,12 @@ const Query = new GraphQLObjectType({
                     return db.models.person.findAll({where: args})
                 }
             },
+            album: {
+                type: new GraphQLList(Album),
+                resolve (root, args) {
+                    return db.models.album.findAll({where: args})
+                }
+            }
         }
     }
 })
