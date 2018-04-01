@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize')
-const faker = require('faker')
 
 const sequelize = new Sequelize(
     'postgres',
@@ -20,19 +19,5 @@ const Person = sequelize.define('person', {
         type: Sequelize.STRING
     },
 })
-
-// define schema
-const Post = sequelize.define('post', {
-    title: {
-        type: Sequelize.STRING
-    },
-    content: {
-        type: Sequelize.STRING
-    }
-})
-
-// Relations
-Person.hasMany(Post)
-Post.belongsTo(Person)
 
 module.exports = sequelize

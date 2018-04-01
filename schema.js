@@ -8,6 +8,9 @@ const {
     GraphQLNonNull
 } = require('graphql')
 
+
+
+
 // create a person schema for graphql
 const Person = new GraphQLObjectType({
     name: 'Person',
@@ -31,55 +34,12 @@ const Person = new GraphQLObjectType({
                 resolve(person) {
                     return person.lastName
                 }
-            },
-            // relational
-            posts: {
-                type: new GraphQLList(Post),
-                resolve(person) {
-                    return person.getPosts()
-                }
             }
         }
     }
 })
 
-// create a post schema for graphql
-const Post = new GraphQLObjectType({
-    name: 'Post',
-    fields () {
-        // match columns from db
-        return {
-            id: {
-                type: GraphQLInt,
-                resolve(post) {
-                    return post.id
-                }
-            },
-            title: {
-                type: GraphQLString,
-                resolve(post) {
-                    return post.title
-                }
-            },
-            content: {
-                type: GraphQLString,
-                resolve(post) {
-                    return post.content
-                }
-            },
-            // relational
-            person: {
-                type: Person,
-                resolve(post) {
-                    return post.getPerson()
-                }
-            }
-        }
-    }
-})
-
-
-// combine person and post into a query
+// combine person into a query
 const Query = new GraphQLObjectType({
     name: 'Query',
     fields: () => {
