@@ -39,24 +39,13 @@ const Person = new GraphQLObjectType({
     }
 })
 
-// combine person into a query
+// combine the object types
 const Query = new GraphQLObjectType({
     name: 'Query',
     fields: () => {
         return {
             people: {
                 type: new GraphQLList(Person),
-                args: {
-                    id: {
-                        type: GraphQLInt
-                    },
-                    firstName: {
-                        type: GraphQLString
-                    },
-                    lastName: {
-                        type: GraphQLString
-                    }
-                },
                 resolve (root, args) {
                     return db.models.person.findAll({where: args})
                 }

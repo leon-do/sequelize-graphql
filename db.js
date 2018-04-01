@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
 )
 
 // define schema
-const Person = sequelize.define('person', {
+sequelize.define('person', {
     firstName: {
         type: Sequelize.STRING
     },
@@ -19,5 +19,7 @@ const Person = sequelize.define('person', {
         type: Sequelize.STRING
     },
 })
+
+console.log('======', sequelize.models)
 
 module.exports = sequelize

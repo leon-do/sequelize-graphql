@@ -11,6 +11,6 @@ app.use('/', GraphHTTP({
     graphiql: true
 }))
 
-app.listen(8080, () => {
-    console.log('localhost:8080')
+app.listen(1111, () => {
+    console.log('localhost:1111')
 })
