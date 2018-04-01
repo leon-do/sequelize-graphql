@@ -1,1 +1,1 @@
-# sequelize-graphql
+![alt text](screenshot.png)
