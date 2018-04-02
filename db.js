@@ -31,19 +31,20 @@ const album = sequelize.define('album', {
 })
 
 
-// create fake data
+
+// uncomment to create fake data
 // sequelize
 //     .sync({force: true})
 //     .then(() => {
 //         console.log('db.js::populating data...')
-//         for (let i = 0; i<9; i++) {
+//         for (let i = 1; i<10; i++) {
 //             person.create({
-//                 firstName: 'fname' + Math.round(Math.random() * 100).toString(),
-//                 lastName: 'lname' + Math.round(Math.random() * 100).toString(),
+//                 firstName: `first_name_${i}`,
+//                 lastName: `last_name_${i}`,
 //             })
 //             album.create({
-//                 song: 'albumSong' + Math.round(Math.random() * 100).toString(),
-//                 artist: 'albumArtist' + Math.round(Math.random() * 100).toString(),
+//                 song: `album_song_${i}`,
+//                 artist: `album_artist_${i}`,
 //             })
 //         }
 //     })

@@ -1,3 +1,5 @@
+// connects graphql to db
+
 const db = require('./db')
 const {
     GraphQLObjectType,
@@ -5,10 +7,7 @@ const {
     GraphQLInt,
     GraphQLSchema,
     GraphQLList,
-    GraphQLNonNull
 } = require('graphql')
-
-
 
 
 // create a person schema for graphql
@@ -30,6 +29,7 @@ const Person = new GraphQLObjectType({
     }
 })
 
+
 const Album = new GraphQLObjectType({
     name: 'Album',
     fields () {
@@ -47,20 +47,45 @@ const Album = new GraphQLObjectType({
     }
 })
 
+
 // combine the object types
 const Query = new GraphQLObjectType({
     name: 'Query',
     fields: () => {
         return {
             people: {
+                args: {
+                    id: {
+                        type: GraphQLInt
+                    },
+                    firstName: {
+                        type: GraphQLString
+                    },
+                    lastName: {
+                        type: GraphQLString
+                    },
+                },
                 type: new GraphQLList(Person),
-                resolve (root, args) {
+                   resolve (obj, args) {
+                    console.log('schema.js::People args:', args)
                     return db.models.person.findAll({where: args})
                 }
             },
             album: {
+                args: {
+                    id: {
+                        type: GraphQLInt
+                    },
+                    song: {
+                        type: GraphQLString
+                    },
+                    artist: {
+                        type: GraphQLString
+                    }
+                },
                 type: new GraphQLList(Album),
-                resolve (root, args) {
+                resolve (obj, args) {
+                    console.log('schema.js::Album args:', args)
                     return db.models.album.findAll({where: args})
                 }
             }
@@ -68,6 +93,8 @@ const Query = new GraphQLObjectType({
     }
 })
 
+
+// root query
 const Schema = new GraphQLSchema({
     query: Query
 })

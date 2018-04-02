@@ -1,1 +1,1 @@
-![alt text](screenshot.png)
+![alt text](./exapmle/screenshot.png)
